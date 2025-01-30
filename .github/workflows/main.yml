@@ -1,0 +1,10 @@
+name: My Test Action
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: susmitha.ganesan@straive.com
+        run: echo "Hello, world!"
