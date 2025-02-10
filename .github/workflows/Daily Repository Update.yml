@@ -1,0 +1,35 @@
+name: Daily Repository Update
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs at 00:00 UTC every day. Change this if you want a different time. For example "15 10 * * *" will run at 10:15 UTC everyday.
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  daily-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Important: Grants permission to write to the repository
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Add a file or make changes (Example: Update README)
+        run: |
+          echo "Last updated: $(date)" >> README.md  # Appends the current date and time to README
+          # Or, you can create a new file:
+          # echo "Daily data" > daily_data.txt
+
+      - name: Commit changes with susmitha.ganesan@straive.com
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated daily update"
+          commit_options: '--no-gpg-sign'
+          file_pattern: README.md # Or specify the file you modified/created.  Use * for all files.
+          email: susmitha.ganesan@straive.com # Your email address
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
