@@ -19,7 +19,7 @@ jobs:
     - name: Configure Git
       run: |
         git config user.name "GitHub Actions Bot"
-        git config user.email "susmitha.ganesan@straive.com"
+        git config user.email susmitha.ganesan@straive.com
 
     - name: Commit Changes
       run: |
